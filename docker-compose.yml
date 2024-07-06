@@ -1,6 +1,26 @@
 version: '3'
 
 services:
+  auth_service:
+    image: msa-notification-system
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 3000:3000
+    command: node auth-service/server.js
+    depends_on:
+      - mongodb
+
+  notification_service:
+    image: msa-notification-system
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 4000:4000
+    command: node notification-service/server.js
+    depends_on:
+      - mongodb
+  
   mongodb:
     image: mongo:latest
     ports:
@@ -9,3 +29,4 @@ services:
       - MONGO_INITDB_DATABASE=notification_system
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
+
