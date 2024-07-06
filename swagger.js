@@ -9,6 +9,12 @@ const options = {
       version: '1.0.0',
       description: 'Services for notification system.',
     },
+    servers: [
+      {
+        url: 'http://spookyhammer.me/api/',
+        description: 'Production server',
+      },
+    ],
   },
   apis: ['./auth-service/router/*.js'], // Path to your API routes
 };
