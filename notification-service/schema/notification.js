@@ -6,7 +6,10 @@ const notificationSchema = new mongoose.Schema({
     ref: 'users'
   },
   message: String,
-  read: Boolean
+  read: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports.notificationsModel = mongoose.model("notifications", notificationSchema);
