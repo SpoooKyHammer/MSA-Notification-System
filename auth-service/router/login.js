@@ -8,10 +8,15 @@ const loginRouter = Router();
 
 /**
  * @swagger
+ * tags:
+ *   name: Authentication
+ *   description: API endpoints for user authentication
+ *
  * /login:
  *   post:
  *     summary: Login a user
  *     description: Authenticate a user with username and password, and generate a JWT token for authorization.
+ *     tags: [Authentication]
  *     requestBody:
  *       required: true
  *       content:

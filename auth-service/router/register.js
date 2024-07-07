@@ -7,10 +7,15 @@ const registerRouter = Router();
 
 /**
  * @swagger
+ * tags:
+ *   name: Authentication
+ *   description: API endpoints for user authentication
+ *
  * /register:
  *   post:
  *     summary: Register a new user
  *     description: Creates a new user account with username, password, and email.
+ *     tags: [Authentication]
  *     requestBody:
  *       required: true
  *       content:
