@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const notificationRouter = require("./router/notifications");
 const { specs, swaggerUi } = require("./../swagger");
 const jwtMiddleware = require("./middleware/jwt");
+const { createTopic } = require("./service/kafka");
 
 const PORT = process.env.NOTIFICATION_SERVICE_PORT;
 
@@ -21,3 +22,8 @@ app.listen(PORT, () => console.log(`[NOTIFICATION_SERVICE] Listening on port: ${
 mongoose.connect(process.env.DB_URI)
   .then(() => console.log("[DATABASE] Connected"))
   .catch(() => console.log("[DATABASE] Connection failed!"))
+
+createTopic().catch((error) => {
+  console.error('[KAFKA] Error creating topic:', error);
+  process.exit(1);
+})
