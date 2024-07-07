@@ -8,7 +8,7 @@ const notificationSchema = new mongoose.Schema({
     default: randomUUID()
   },
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.UUID,
     ref: 'users'
   },
   message: String,
