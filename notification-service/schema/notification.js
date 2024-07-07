@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const notificationSchema = new mongoose.Schema({
   _id: {
     type: mongoose.SchemaTypes.UUID,
-    default: randomUUID()
+    default: () => randomUUID()
   },
   userId: {
     type: mongoose.Schema.Types.UUID,

@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   _id: {
     type: mongoose.SchemaTypes.UUID,
-    default: randomUUID()
+    default: () => randomUUID()
   },
   username: {
     type: String,
