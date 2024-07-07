@@ -7,7 +7,10 @@ const userSchema = new mongoose.Schema({
   },
   email: String,
   password: String,
-  connected: Boolean
+  connected: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports.usersModel = mongoose.model("users", userSchema);
