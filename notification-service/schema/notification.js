@@ -1,6 +1,12 @@
+const { randomUUID } = require("crypto");
+
 const mongoose = require("mongoose");
 
 const notificationSchema = new mongoose.Schema({
+  _id: {
+    type: mongoose.SchemaTypes.UUID,
+    default: randomUUID()
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users'
