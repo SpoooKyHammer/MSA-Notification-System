@@ -1,5 +1,6 @@
 require("dotenv").config()
 const express = require("express");
+const cors = require("cors")
 const mongoose = require("mongoose");
 
 const registerRouter = require("./router/register");
@@ -10,6 +11,7 @@ const PORT = process.env.AUTH_SERVICE_PORT;
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.use("/api/register", registerRouter)
 app.use("/api/login", loginRouter)
