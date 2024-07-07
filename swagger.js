@@ -11,12 +11,16 @@ const options = {
     },
     servers: [
       {
-        url: 'http://spookyhammer.me/api/',
+        url: 'http://spookyhammer.me/api',
         description: 'Production server',
+      }, 
+      {
+        url: 'http://localhost:4000/api',
+        description: 'Development server'
       },
     ],
   },
-  apis: ['./auth-service/router/*.js'], // Path to your API routes
+  apis: ['./auth-service/router/*.js', './notification-service/router/*.js'], 
 };
 
 const specs = swaggerJsdoc(options);
