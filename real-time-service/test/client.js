@@ -1,8 +1,8 @@
 const io = require('socket.io-client');
 
-const socket = io('http://localhost:4001', {
+const socket = io('http://localhost/', {
     auth: {
-      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMmQzYzJhMy0yOGM4LTQwMmQtOGU0Yi02NDBhYTY5YTFmNzciLCJpYXQiOjE3MjA0MzMwMDcsImV4cCI6MTcyMDQzNjYwN30.Zt-9I67g4iimiecR3E7Nq-gfYn4ls4MeRJwU4e_2fk4"
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwYjJkNDZlYS04MDczLTQ3ZmYtOWI5Mi00YmI5OTZiMTEzMTgiLCJpYXQiOjE3MjA1MjU5MTMsImV4cCI6MTcyMDUyOTUxM30.OCTj-TqtCN6gSGsDBDxKxxedf7lKFwUKHGPN6v0NB9I"
     }
   }
 );  // Replace with your server URL
@@ -15,6 +15,7 @@ socket.on('connect', () => {
 
 socket.on('notification', (msg) => {
   console.log(`Message from server: ${msg}`);
+  console.log(msg);
 });
 
 socket.on('disconnect', () => {

@@ -5,8 +5,8 @@ services:
     image: msa-notification-system
     volumes:
       - .:/usr/src/app
-    ports:
-      - 3000:3000
+    expose:
+      - 4002
     command: node auth-service/server.js
     depends_on:
       - mongodb
@@ -15,8 +15,8 @@ services:
     image: msa-notification-system
     volumes:
       - .:/usr/src/app
-    ports:
-      - 4000:4000
+    expose:
+      - 4000
     environment:
       KAFKA_BOOTSTRAP_SERVERS: PLAINTEXT://localhost:9092
     command: node notification-service/server.js
@@ -28,16 +28,16 @@ services:
     image: msa-notification-system
     volumes:
       - .:/usr/src/app
-    ports:
-      - 4001:4001
+    expose:
+      - 4001
     command: node real-time-service/server.js
     depends_on:
       - kafka
 
   mongodb:
     image: mongo:latest
-    ports:
-      - 27017:27017
+    expose:
+      - 27017
     environment:
       - MONGO_INITDB_DATABASE=notification_system
       - MONGO_INITDB_ROOT_USERNAME=admin
@@ -51,14 +51,14 @@ services:
     container_name: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
-    ports:
-      - "2181:2181"
+    expose:
+      - 2181
 
   kafka:
     image: confluentinc/cp-kafka:6.2.1
     container_name: kafka
-    ports:
-      - "9092:9092"
+    expose:
+      - 9092
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -67,4 +67,13 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - zookeeper
-
+  
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 80:80
+    depends_on:
+      - auth_service
+      - notification_service

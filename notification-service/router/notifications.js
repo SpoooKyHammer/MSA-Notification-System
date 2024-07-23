@@ -117,7 +117,7 @@ notificationRouter.post("/", async (req, res) => {
   });
   await notification.save();
   
-  await produceMessage(req.user.userId, message);
+  await produceMessage(req.user.userId, message, notification._id);
 
   res.json({_id: notification._id});
 })

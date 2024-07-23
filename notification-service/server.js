@@ -4,7 +4,6 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const notificationRouter = require("./router/notifications");
-const { specs, swaggerUi } = require("./../swagger");
 const jwtMiddleware = require("./middleware/jwt");
 const { createTopic } = require("./service/kafka");
 
@@ -13,7 +12,6 @@ const PORT = process.env.NOTIFICATION_SERVICE_PORT;
 const app = express();
 app.use(express.json());
 app.use(cors());
-// app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.use(jwtMiddleware);
 app.use("/api/notification", notificationRouter)
 

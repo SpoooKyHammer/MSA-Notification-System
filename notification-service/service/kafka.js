@@ -10,15 +10,16 @@ const producer = kafkaClient.producer();
  * Asynchronously produces a message to Kafka.
  * @param {string} userId - The UUID string representing the user ID.
  * @param {string} message - The message string to be sent to Kafka.
+ * @param {string} notificationId - The UUID string representing the notification ID. 
  * @returns {Promise<void>}
  */
-async function produceMessage(userId, message) {
+async function produceMessage(userId, message, notificationId) {
   try {
     await producer.connect();
     await producer.send({
       topic: process.env.KAFKA_TOPIC,
       messages: [
-        { key: userId, value: JSON.stringify({ userId, message }) }
+        { key: userId, value: JSON.stringify({ notificationId, userId, message }) }
       ]
     });
   } catch (error) {

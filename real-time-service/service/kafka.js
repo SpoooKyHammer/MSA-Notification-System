@@ -25,10 +25,10 @@ async function runConsumer(io) {
     eachMessage: async ({ topic, partition, message }) => {
 
       /*
-       * @type { {userId: string, message: string} }*/
+       * @type { {userId: string, message: string, notificationId: string} }*/
       const notification = JSON.parse(message.value.toString());
       
-      io.to(notification.userId).emit("notification", notification.message);
+      io.to(notification.userId).emit("notification", notification);
 
       // Manually commit the offset to Kafka once message is emitted.
       await consumer.commitOffsets([{ topic, partition, offset: message.offset }]);
